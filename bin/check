@@ -1,0 +1,14 @@
+#!/bin/bash
+# bin/check — Intellify-IT/.github gate: org profile truth + links, no secrets. (Issue #1, 12 Nov 2026)
+set -u
+cd "$(dirname "$0")/.."
+fail=0; f=profile/README.md
+[ -f "$f" ] || { echo "FAIL: $f missing"; exit 1; }
+for need in "https://intellify-it.com" "https://www.linkedin.com/company/intellify-it" "https://www.facebook.com/intellifyit" "https://x.com/intellifyit" "hello@intellify-it.com" "security@intellify-it.com"; do
+  grep -qF "$need" "$f" || { echo "FAIL: $f lacks $need"; fail=1; }
+done
+# Truth: not incorporated yet (BRS draft parked) -> never "Ltd"/"Limited"; no placeholders; no popularity claims.
+grep -nE '\b(Ltd|Limited)\b|TODO|TBD|lorem|Most popular|#1 ' "$f" && { echo "FAIL: forbidden wording"; fail=1; }
+command -v gitleaks >/dev/null || { echo "FAIL: gitleaks required"; exit 2; }
+gitleaks dir --no-banner --redact . >/dev/null 2>&1 || { echo "FAIL: gitleaks"; fail=1; }
+[ $fail = 0 ] && echo "bin/check: PASS" || { echo "bin/check: FAIL"; exit 1; }
