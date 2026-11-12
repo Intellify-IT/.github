@@ -14,9 +14,6 @@ Based in Nairobi, Kenya, since 2024. We serve clients across Kenya, Africa and w
 ## Our own products
 AGIE (AI governance) and Budget Book (personal finance) are in development; AI Lab is a concept. See [intellify-it.com/products](https://intellify-it.com/products/).
 
-## How we build
-Every change goes through an issue, a failing test first, one gate (`bin/check`) and an independent review of the exact commit before it merges. Secrets never live in git.
-
 ## Contact
 - Web: [intellify-it.com](https://intellify-it.com/) · [Work](https://intellify-it.com/work/) · [Pricing](https://intellify-it.com/pricing/)
 - Email: [hello@intellify-it.com](mailto:hello@intellify-it.com)
